@@ -17,10 +17,13 @@ public class Singleton {
 
 
     //removing synchronized makes threads access count attribute in same time and generate wrong output
-    public synchronized void process(String taskName){
+    public void process(String taskName){
         System.out.println("-------->Processing task " + taskName);
         for(int i = 1; i <= 5; i++){
-            count++;
+            // synchronizing only specific part instead of whole method improve app execution
+            synchronized(this){
+                count++;
+            }
             System.out.println("--> count = " + count);
             try {
                 Thread.sleep(1000);
